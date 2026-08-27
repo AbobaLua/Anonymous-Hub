@@ -90,7 +90,7 @@ local OthersStuffS = SettingsT:CreateSection("Others")
 local RayfieldVisibleB = SettingsT:CreateButton({
    Name = "Visible",
    Callback = function()
-   if Rayfield:IsVisible() == true then
+   if Rayfield:IsVisible() then
      Rayfield:SetVisibility(false)
    else
      Rayfield:SetVisibility(true)
