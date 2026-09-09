@@ -3,7 +3,7 @@ local SettingsT = Window:CreateTab("Settings", "settings")
 local STheme = "Default"
 local currentProperty = "TextColor"
 local BasicTS = SettingsT:CreateSection("Basic Themes")
-BasicTS:CreateDropdown({
+SettingsT:CreateDropdown({
    Name = "Select Theme",
    Options = {"Default", "AmberGlow", "Amethyst", "Bloom", "DarkBlue", "Green", "Light", "Ocean", "Serenity"},
    CurrentOption = "Default",
@@ -13,7 +13,7 @@ BasicTS:CreateDropdown({
      STheme = Options[1] or "Default"
    end,
 })
-BasicTS:CreateButton({
+SettingsT:CreateButton({
    Name = "Set Theme",
    Callback = function()
      Window.ModifyTheme(STheme)
@@ -54,7 +54,7 @@ local CustomTheme = {
 	InputStroke = Color3.fromRGB(65, 65, 65),
 	PlaceholderColor = Color3.fromRGB(178, 178, 178)
 }
-CustomTS:CreateDropdown({
+SettingsT:CreateDropdown({
    Name = "Select Property",
    Options = {"TextColor", "Background","Topbar","Shadow","NotificationBackground","NotificationActionsBackground","TabBackground","TabStroke","TabTextColor","TabBackgroundSelected","SelectedTabTextColor","ElementBackground","SecondaryElementBackground","ElementBackgroundHover","ElementStroke","SecondaryElementStroke","SliderBackground","SliderProgress","SliderStroke","ToggleBackground","ToggleEnabled","ToggleDisabled","ToggleEnabledStroke","ToggleDisabledStroke","ToggleEnabledOuterStroke","ToggleDisabledOuterStroke","DropdownSelected","DropdownUnselected","InputBackground","InputStroke","PlaceholderColor"},
    CurrentOption = "TextColor",
@@ -64,7 +64,7 @@ CustomTS:CreateDropdown({
      currentProperty = Options[1] or "TextColor"
    end,
 })
-CustomTS:CreateColorPicker({
+SettingsT:CreateColorPicker({
     Name = "Custom Property Color",
     Color = Color3.fromRGB(240,240,240),
     Flag = "ColorChange",
@@ -72,20 +72,20 @@ CustomTS:CreateColorPicker({
       CustomTheme[currentProperty] = Value
     end
 })
-CustomTS:CreateButton({
+SettingsT:CreateButton({
    Name = "Set Custom Theme",
    Callback = function()
      Window.ModifyTheme(CustomTheme)
    end,
 })
 local OthersStuffS = SettingsT:CreateSection("Others")
-CustomTS:CreateButton({
+SettingsT:CreateButton({
    Name = "Visible",
    Callback = function()
      Rayfield:SetVisibility(not Rayfield:IsVisible())
    end,
 })
-CustomTS:CreateButton({
+SettingsT:CreateButton({
    Name = "Destroy UI",
    Callback = function()
      Rayfield:Destroy()
