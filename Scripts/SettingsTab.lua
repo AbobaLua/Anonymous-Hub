@@ -1,6 +1,7 @@
 local SettingsT = Window:CreateTab("Settings", "settings")
 
 local STheme = "Default"
+local currentProperty = "TextColor"
 local BasicTS = SettingsT:CreateSection("Basic Themes")
 local ThemeSD = SettingsT:CreateDropdown({
    Name = "Select Theme",
@@ -9,17 +10,13 @@ local ThemeSD = SettingsT:CreateDropdown({
    MultipleOptions = false,
    Flag = "SelectedTheme",
    Callback = function(Options)
-   if type(Options) == "table" then
-        STheme = Options[1] or "Default"
-      else
-        STheme = Options
-      end
+     STheme = Options[1] or "Default"
    end,
 })
 local ThemeB = SettingsT:CreateButton({
    Name = "Set Theme",
    Callback = function()
-   Window.ModifyTheme(STheme)
+     Window.ModifyTheme(STheme)
    end,
 })
 
@@ -57,7 +54,6 @@ local CustomTheme = {
 	InputStroke = Color3.fromRGB(65, 65, 65),
 	PlaceholderColor = Color3.fromRGB(178, 178, 178)
 }
-local currentProperty = "TextColor"
 local SelectPropertyD = SettingsT:CreateDropdown({
    Name = "Select Property",
    Options = {"TextColor", "Background","Topbar","Shadow","NotificationBackground","NotificationActionsBackground","TabBackground","TabStroke","TabTextColor","TabBackgroundSelected","SelectedTabTextColor","ElementBackground","SecondaryElementBackground","ElementBackgroundHover","ElementStroke","SecondaryElementStroke","SliderBackground","SliderProgress","SliderStroke","ToggleBackground","ToggleEnabled","ToggleDisabled","ToggleEnabledStroke","ToggleDisabledStroke","ToggleEnabledOuterStroke","ToggleDisabledOuterStroke","DropdownSelected","DropdownUnselected","InputBackground","InputStroke","PlaceholderColor"},
@@ -65,11 +61,7 @@ local SelectPropertyD = SettingsT:CreateDropdown({
    MultipleOptions = false,
    Flag = "SelectedProperty",
    Callback = function(Options)
-   if type(Options) == "table" then
-        currentProperty = Options[1] or "TextColor"
-      else
-        currentProperty = Options
-      end
+     currentProperty = Options[1] or "TextColor"
    end,
 })
 local ColorChangeCP = SettingsT:CreateColorPicker({
@@ -77,29 +69,25 @@ local ColorChangeCP = SettingsT:CreateColorPicker({
     Color = Color3.fromRGB(240,240,240),
     Flag = "ColorChange",
     Callback = function(Value)
-    CustomTheme[currentProperty] = Value
+      CustomTheme[currentProperty] = Value
     end
 })
 local ThemeCustomB = SettingsT:CreateButton({
    Name = "Set Custom Theme",
    Callback = function()
-   Window.ModifyTheme(CustomTheme)
+     Window.ModifyTheme(CustomTheme)
    end,
 })
 local OthersStuffS = SettingsT:CreateSection("Others")
 local RayfieldVisibleB = SettingsT:CreateButton({
    Name = "Visible",
    Callback = function()
-   if Rayfield:IsVisible() then
-     Rayfield:SetVisibility(false)
-   else
-     Rayfield:SetVisibility(true)
-   end
+     Rayfield:SetVisibility(not Rayfield:IsVisible())
    end,
 })
 local DestroyRayfieldB = SettingsT:CreateButton({
    Name = "Destroy UI",
    Callback = function()
-   Rayfield:Destroy()
+     Rayfield:Destroy()
    end,
 })
