@@ -1,9 +1,9 @@
+return function(Window)
 local SettingsT = Window:CreateTab("Settings", "settings")
-
 local STheme = "Default"
 local currentProperty = "TextColor"
 local BasicTS = SettingsT:CreateSection("Basic Themes")
-local ThemeSD = SettingsT:CreateDropdown({
+BasicTS:CreateDropdown({
    Name = "Select Theme",
    Options = {"Default", "AmberGlow", "Amethyst", "Bloom", "DarkBlue", "Green", "Light", "Ocean", "Serenity"},
    CurrentOption = "Default",
@@ -13,7 +13,7 @@ local ThemeSD = SettingsT:CreateDropdown({
      STheme = Options[1] or "Default"
    end,
 })
-local ThemeB = SettingsT:CreateButton({
+BasicTS:CreateButton({
    Name = "Set Theme",
    Callback = function()
      Window.ModifyTheme(STheme)
@@ -54,7 +54,7 @@ local CustomTheme = {
 	InputStroke = Color3.fromRGB(65, 65, 65),
 	PlaceholderColor = Color3.fromRGB(178, 178, 178)
 }
-local SelectPropertyD = SettingsT:CreateDropdown({
+CustomTS:CreateDropdown({
    Name = "Select Property",
    Options = {"TextColor", "Background","Topbar","Shadow","NotificationBackground","NotificationActionsBackground","TabBackground","TabStroke","TabTextColor","TabBackgroundSelected","SelectedTabTextColor","ElementBackground","SecondaryElementBackground","ElementBackgroundHover","ElementStroke","SecondaryElementStroke","SliderBackground","SliderProgress","SliderStroke","ToggleBackground","ToggleEnabled","ToggleDisabled","ToggleEnabledStroke","ToggleDisabledStroke","ToggleEnabledOuterStroke","ToggleDisabledOuterStroke","DropdownSelected","DropdownUnselected","InputBackground","InputStroke","PlaceholderColor"},
    CurrentOption = "TextColor",
@@ -64,7 +64,7 @@ local SelectPropertyD = SettingsT:CreateDropdown({
      currentProperty = Options[1] or "TextColor"
    end,
 })
-local ColorChangeCP = SettingsT:CreateColorPicker({
+CustomTS:CreateColorPicker({
     Name = "Custom Property Color",
     Color = Color3.fromRGB(240,240,240),
     Flag = "ColorChange",
@@ -72,22 +72,23 @@ local ColorChangeCP = SettingsT:CreateColorPicker({
       CustomTheme[currentProperty] = Value
     end
 })
-local ThemeCustomB = SettingsT:CreateButton({
+CustomTS:CreateButton({
    Name = "Set Custom Theme",
    Callback = function()
      Window.ModifyTheme(CustomTheme)
    end,
 })
 local OthersStuffS = SettingsT:CreateSection("Others")
-local RayfieldVisibleB = SettingsT:CreateButton({
+CustomTS:CreateButton({
    Name = "Visible",
    Callback = function()
      Rayfield:SetVisibility(not Rayfield:IsVisible())
    end,
 })
-local DestroyRayfieldB = SettingsT:CreateButton({
+CustomTS:CreateButton({
    Name = "Destroy UI",
    Callback = function()
      Rayfield:Destroy()
    end,
 })
+end
