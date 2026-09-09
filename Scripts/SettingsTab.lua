@@ -1,4 +1,4 @@
-return function(Window)
+return function(Window, Rayfield)
 local SettingsT = Window:CreateTab("Settings", "settings")
 local STheme = "Default"
 local currentProperty = "TextColor"
